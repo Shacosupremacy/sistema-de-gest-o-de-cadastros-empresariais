@@ -1,10 +1,10 @@
 <?php
 mysqli_report(MYSQLI_REPORT_OFF);
 
-$host = "localhost";
-$banco = "u511483757_cadastros";
-$usuario = "u511483757_matheus";
-$senha = "Mat13012010";
+$host = "*******";
+$banco = "*********";
+$usuario = "********";
+$senha = "********";
 
 $conn = @new mysqli($host, $usuario, $senha, $banco);
 
