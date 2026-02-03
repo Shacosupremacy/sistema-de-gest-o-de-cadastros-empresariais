@@ -2,23 +2,23 @@
 require_once "includes/conexao.php";
 
 $errors = [];
-$old = []; // Para manter os valores já digitados
+$old = []; 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST["website"])) {
 
     $old = $_POST;
 
-    // Nome da empresa
+ 
     if (empty($_POST["nome_empresa"])) {
         $errors['nome_empresa'] = "O nome da empresa é obrigatório.";
     }
 
-    // E-mail
+  
     if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = "E-mail inválido.";
     }
 
-    // CPF/CNPJ
+  
     $cpf_cnpj = preg_replace("/\D/", "", $_POST["cnpj"]);
     if (strlen($cpf_cnpj) == 11) {
         // CPF válido: você pode adicionar função de validação real se quiser
@@ -28,13 +28,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST["website"])) {
         $errors['cnpj'] = "CPF ou CNPJ inválido. Deve ter 11 (CPF) ou 14 (CNPJ) números.";
     }
 
-    // Telefone
+
     $telefone = preg_replace("/\D/", "", $_POST["telefone"]);
     if (!empty($telefone) && strlen($telefone) < 10) {
         $errors['telefone'] = "Telefone inválido.";
     }
 
-    // CEP
+  
     $cep = preg_replace("/\D/", "", $_POST["cep"]);
     if (!empty($cep) && strlen($cep) != 8) {
         $errors['cep'] = "CEP inválido. Deve ter 8 números.";
@@ -154,7 +154,7 @@ Thiago Mecânica Diesel © 2026
 </footer>
 
 <script>
-// Máscara e validação cliente CPF/CNPJ
+
 const form = document.getElementById("cadastroForm");
 const cnpjInput = form.cnpj;
 const telInput = form.telefone;
@@ -164,7 +164,7 @@ function maskInput(input, cpfMask, cnpjMask) {
     input.addEventListener("input", function() {
         let val = input.value.replace(/\D/g,'');
         if(val.length <= 11){
-            // CPF
+            
             let newVal = '';
             for(let i=0;i<val.length;i++){
                 if(i==3||i==6) newVal+='.';
@@ -173,7 +173,7 @@ function maskInput(input, cpfMask, cnpjMask) {
             }
             input.value = newVal;
         } else {
-            // CNPJ
+          
             let newVal = '';
             for(let i=0;i<val.length;i++){
                 if(i==2||i==5) newVal+='.';
@@ -190,7 +190,7 @@ maskInput(cnpjInput);
 maskInput(telInput);
 maskInput(cepInput);
 
-// Validação final no cliente
+
 form.addEventListener("submit", function(e){
     let errors = [];
     const email = this.email.value.trim();
