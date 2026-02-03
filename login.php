@@ -16,15 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $user = $res->fetch_assoc();
         $stmt->close();
 
-        // Se você ainda usa senha em texto:
+       
         if ($user && $senha === $user["senha"]) {
             $_SESSION["usuario"] = $user["usuario"];
             header("Location: painel.php");
             exit;
         }
 
-        // Se futuramente usar hash:
-        // if ($user && password_verify($senha, $user["senha"])) { ... }
+        
 
         $erro = "Usuário ou senha inválidos.";
     } else {
